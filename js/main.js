@@ -7,6 +7,7 @@ $(document).ready(initializeApp);
 function retrieveUserPositon(data) {
   userPositionLat = data.coords.latitude;
   userPositionLong = data.coords.longitude;
+  console.log(userPositionLat, userPositionLong);
 }
 
 function initializeApp() {
