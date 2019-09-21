@@ -19,7 +19,7 @@ class Marker {
    * @param {object} position: object containing lat and lng key/value pairs
    * @return {none}
   */
-  renderUser = (position) => {
+  renderUser(position) {
     const userMark = new google.maps.Marker({
       position: position,
       map: this.map,
@@ -37,7 +37,7 @@ class Marker {
   * @return {none} - nothing
  */
 
-  renderEvent = (event, index) => {
+  renderEvent(event, index) {
     const position = {
       lat: parseFloat(event.venue.address.latitude),
       lng: parseFloat(event.venue.address.longitude)
@@ -81,7 +81,7 @@ class Marker {
   * @param {number} index: number to index its position in the array
   * @return {none}
  */
-  renderBiz = (biz, index) => {
+  renderBiz(biz, index) {
     const position = {
       lat: parseFloat(biz.coordinates.latitude),
       lng: parseFloat(biz.coordinates.longitude)
@@ -121,7 +121,7 @@ class Marker {
 /*
   click handler for marker object to set the position of the map to the marker
 */
-  eventClickHandler = () => {
+  eventClickHandler() {
    this.updateCenterCallback(this.position);
   }
 }

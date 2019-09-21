@@ -1,12 +1,4 @@
-/* Class definition for EventBrite AJAX Handler*/
 class Eventbrite {
-
-/**
-* Constructor for class.
-* @param {num, num} - lat - latitude of current location
-*                     lng - longtitude of current location
-*/
-
   constructor(lat, lng) {
     this.key = 'YT37TJX32QTNUIJPS4NG';
     this.eventStorage = [];
@@ -84,6 +76,8 @@ class Eventbrite {
       newEvent.name = thisEvent.name.html;
       newEvent.description = thisEvent.description;
       newEvent.address = thisEvent.venue.localized_multi_line_address_display;
+      newEvent.lat = thisEvent.venue.address.latitude;
+      newEvent.lng = thisEvent.venue.address.longitude;
       this.eventStorage.push(newEvent);
       let eventDom = $("<div>", {
         id: "event"+eventIndex,
@@ -130,5 +124,23 @@ class Eventbrite {
     }
   }
 
+
+  /**
+  * converts data to be able to be rendered to dom
+  * @param {string} type - lat or lng
+  * @param {num} id - id of business
+  * @return {num} - lat or lng of business
+  *
+  */
+  getCoordinatesById(type, id) {
+    switch (type) {
+      case 'lat':
+        return this.eventStorage[id].lat;
+        break;
+      case 'lng':
+        return this.eventStorage[id].lng;
+        break;
+    }
+  }
 
 }
