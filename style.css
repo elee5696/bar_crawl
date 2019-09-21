@@ -151,7 +151,7 @@ body{
 }
 
 .event{
-  background-color: #CDFFF9;
+  background-color: lightgray;
 }
 
 .event-name {
@@ -159,7 +159,7 @@ body{
 }
 
 .business{
-  background-color: #C5D9E2;
+  background-color: lightgray;
 }
 
 .businessName {
@@ -195,13 +195,13 @@ body{
   transform: scale(1.08);
   z-index: 1;
   cursor: pointer;
-  background-color: rgb(255, 192, 153);
+  background-color: rgb(252, 214, 118);
 }
 .event:hover:not(.expanded) {
   transform: scale(1.08);
   z-index: 1;
   cursor: pointer;
-  background-color: rgb(255, 192, 153);
+  background-color: rgb(252, 214, 118);
 }
 
 /* WEATHER STYLING */
