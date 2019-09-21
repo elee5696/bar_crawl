@@ -4,10 +4,15 @@ class App {
     this.apiList = {};
     this.userPositionLat = null;
     this.userPositionLong = null;
+    this.domElements = {
+      tabSelected: null,
+      containerSelected: null,
+    };
     this.retrieveUserPositon = this.retrieveUserPositon.bind(this);
     this.initApp = this.initApp.bind(this);
     this.domClickHandler = this.domClickHandler.bind(this);
     this.expandAndCollapse = this.expandAndCollapse.bind(this);
+    this.tabClickHandler = this.tabClickHandler.bind(this);
   }
 
 /**
@@ -97,10 +102,13 @@ class App {
 */
 
   initClickHandlers(){
+    this.domElements.tabSelected = $('.tabBars');
+    this.domElements.containerSelected = $('.businessContainer');
     $('.eventsContainer').on('click', '.event', this.domClickHandler);
     $('.businessContainer').on('click', '.business', this.domClickHandler);
     $('.mapContainer').on('click', '.addLocation', this.addLocationClickHandler);
-    $('.calculateRouteButton').on('click', this.apiList.map.calculateAndDisplayRoute);
+    $('.calculateRoute').on('click', this.apiList.map.calculateAndDisplayRoute);
+    $('.tabContainer').on('click', '.tab', this.tabClickHandler);
   }
 
 /**
@@ -120,12 +128,22 @@ class App {
 * @param {object} - event
 * @return - none
 */
-
   domClickHandler = (event) => {
     if ($(event.target).is("a")){
       return;
     }
     this.expandAndCollapse($(event.currentTarget));
+  }
+
+  tabClickHandler(event){
+    let element = $(event.currentTarget);
+    this.domElements.tabSelected.removeClass('tabSelected');
+    element.addClass('tabSelected');
+    this.domElements.tabSelected = element;
+    let container = $('.' + element.text().toLowerCase());
+    this.domElements.containerSelected.addClass('hidden');
+    container.removeClass('hidden');
+    this.domElements.containerSelected = container;
   }
 
 /**
@@ -178,11 +196,13 @@ class App {
     let type = '';
     var newDom = null;
     if (clickId.includes("business")){
-      newDom = $(".business." + clickId).clone();
+      newDom = $('.business.' + clickId).clone();
+      newDom.addClass('destination');
       type = "biz";
       clickId = clickId.substr(8);
     } else {
-      newDom = $(".event." + clickId).clone();
+      newDom = $('.event.' + clickId).clone();
+      newDom.addClass('destination');
       type = "events";
       clickId = clickId.substr(5);
     }

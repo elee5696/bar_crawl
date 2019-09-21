@@ -164,11 +164,11 @@ class googleMap {
    * @return {none}
    */
   clearMarkers() {
+    if (this.directionsRenderer) {
+      this.directionsRenderer.set('directions',null);
+    }
     this.setMapOnAll(null);
     this.waypts = [];
-    if (this.markers.directions.length){
-      this.directionsRenderer.setMap(null);
-    }
   }
   /**
    * function to close the pop up window on marker in map

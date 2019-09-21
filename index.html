@@ -23,28 +23,37 @@
       </div>
     </div>
   <header class="mainHeader">
-    <h1 class="headerName"></h1>
+    <div class="headerIcon"></div>
+    <div class="headerName">Beer Crawl</div>
+    <div class="weatherContainer">
+    </div>
   </header>
-  <div class="weatherContainer">
-  </div>
   <input id="pac-input" class="controls" type="text" placeholder="Search Box">
   <div class="mainContainer">
-    <div class="eventsContainer">
+    <div class="infoContainer">
+      <div class="tabContainer">
+        <div class="tab tabBars tabSelected">Bars</div>
+        <div class="tab tabEvents">Events</div>
+        <div class="tab tabDestinations">Destinations</div>
+      </div>
+      <div class="businessContainer bars"></div>
+      <div class="eventsContainer events hidden"></div>
+      <div class="destinationsContainer destinations hidden">
+        <div id="directionsPanel" class="destinationsAdded">
+
+        </div>
+        <div class="calculateRoute">
+          <div class="calculateRouteButton">Calculate Route</div>
+        </div>
+      </div>
     </div>
     <div class="mapContainer">
       <div id="mapDisplay" class="mapDisplay">
         Map goes here
       </div>
     </div>
-    <div class="businessContainer">
-    </div>
   </div>
-  <div class="destinationsAddedContainer">
-    <div class='destinationsAddedTitle'>Destinations Added:</div>
-    <div class="destinationsAdded"></div>
-    <div class="calculateRoute"><button class="calculateRouteButton">Calculate Route</button></div>
-  </div>
-  <div id="directionsPanel" class="directionsPanel"></div>
+   </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWq6apxh7IJs8njuJgCEJf5QPenKjrCYc&libraries=places"></script>
 </body>
 

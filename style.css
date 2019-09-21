@@ -10,30 +10,41 @@
 
 body{
   height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(182, 182, 182);
+  font-family: manrope-bold, Arial, Helvetica, sans-serif;
+  background-color: #201f1e;
   padding: 0;
   margin: 0;
 }
 
 .mainHeader {
-  width: 100%;
+  display: flex;
+  width: 90%;
+  height: 100px;
+  color: white;
+  margin: 0 auto;
 }
 
-.headerName {
+.headerIcon {
   height: 100px;
-  background-image: url('assets/images/bar-crawler-logo.png');
+  width: 100px;
+  background-image: url('assets/images/beer_icon.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
+.headerName{
+  margin: auto;
+  font-size: 3rem;
+  width: 380px;
+  padding: 0 10px;
+}
 
 .mainContainer {
   display: flex;
-  width: 100%;
-  height: 70%;
+  width: 90%;
+  height: 75%;
   justify-content: center;
-  margin-top: 8px;
+  margin: 0 auto;
 }
 
 /* width */
@@ -57,34 +68,49 @@ body{
 }
 
 .mapContainer {
-  width: 55%;
+  width: 75%;
+  padding-top: 40px;
 }
-
-.eventsContainer, .businessContainer {
-  width: 20%;
-  text-align: center;
-  height: 480px;
-  box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
+.infoContainer{
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  width: 25%;
+  height: 100%;
+}
+.eventsContainer, .businessContainer, .destinationsContainer{
+  background-color: white;
+  width: 100%;
+  text-align: center;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.eventContainer {
-  margin-right: 1%;
+.tabContainer {
+  display: flex;
+  color: white;
+  height: 40px;
 }
-
-.businessContainer {
-  margin-left: 0.4%;
+.tab {
+  cursor: pointer;
+  font-size: 1.3rem;
+  padding: 7px 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.tabBars {
+  width: 200px;
+}
+.tab.tabSelected, .tab:hover{
+  background-color: white;
+  color: #201f1e;
 }
 
 .mapDisplay {
   text-align: center;
-  height: 500px;
+  height: 550px;
+  margin-left: 10px;
 }
 
 .rating {
@@ -100,16 +126,25 @@ body{
   background-position: left;
   background-repeat: no-repeat;
   transition-duration: 500ms;
-  display: inline-block;
   border-radius: 2px;
-  max-height: 25px;
-  margin-bottom: 1%;
+  height: 22px;
   color: rgb(53, 53, 53);
   overflow: hidden;
   width: 98%;
   align-items: center;
-  justify-content: center;
+  margin: auto;
 }
+.destination{
+  background-size: 30px;
+  background-position: left;
+  background-repeat: no-repeat;
+  transition-duration: 500ms;
+  border-radius: 2px;
+  height: 22px;
+  color: rgb(53, 53, 53);
+  overflow: hidden;
+  align-items: center;
+  margin: auto;}
 
 .address {
   font-size: .85em;
@@ -131,8 +166,19 @@ body{
 .businessName {
   margin-bottom : 10px;
 }
-
-
+.destinationsAdded{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 520px;
+  width: 100%;
+  overflow-y: scroll;
+}
+.destination.business, .destination.event{
+  max-height: 25px;
+  margin: 3px;
+  flex: 1;
+}
 .collapsed{
   flex: 0;
   margin: auto;
@@ -163,7 +209,7 @@ body{
 .weatherContainer{
   width: 100%;
   display: flex;
-  height: 150px;
+  height: 100px;
   justify-content: space-around;
   align-items: center;
   text-align: center;
@@ -175,7 +221,7 @@ body{
 .weatherContainer > * {
   display: flex;
   flex-direction: column;
-  height: 130px;
+  height: 100%;
   width: 12%;
   border: 2px solid #B3B5BB;
   font-family: manrope-reg;
@@ -277,8 +323,20 @@ body{
   border: 2px solid #FF8A5B;
   padding: 5px;
 }
-.addLocation:hover{
+.addLocation:hover, .calculateRoute:hover{
   background-color: lightgray;
+}
+.calculateRoute{
+  display: flex;
+  height: 20px;
+  width: 150px;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 5px;
+  margin-bottom: 3px;
+}
+.calculateRouteButton{
+  margin: auto;
 }
 
 .loading_screen {
@@ -288,7 +346,7 @@ body{
   margin: 0;
   padding: 0;
   background-color: #201f1e;
-  position: absolute;
+  position: fixed;
   height: 100%;
   width: 100%;
   z-index: 3;
@@ -318,16 +376,7 @@ body{
   top: -100%;
   transition-duration: 1s;
 }
-.destinationsAddedContainer, .destinationsAdded{
-  display: flex;
-  align-items: center;
-}
 
-.destinationsAdded *{
-  max-height: 25px;
-  flex: 1;
-  margin: 3px;
-}
 .hidden {
   display: none;
 }
