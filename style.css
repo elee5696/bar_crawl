@@ -155,6 +155,7 @@ body{
 }
 
 .event-name {
+  margin-top: -2px;
   text-align: center;
 }
 
@@ -163,6 +164,7 @@ body{
 }
 
 .businessName {
+  margin-top: -2px;
   margin-bottom : 10px;
 }
 .destinationsAdded{
@@ -189,6 +191,7 @@ body{
   margin-bottom: 5px;
   flex: 1;
   max-height: 100%;
+  background-position: center;
 }
 
 .business:hover:not(.expanded) {
