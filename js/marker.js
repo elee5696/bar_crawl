@@ -65,6 +65,10 @@ class Marker {
       icon: icon
     });
     this.marker.addListener('click', this.eventClickHandler);
+    this.domElement.click(() => {
+      this.closeWindows();
+      infoWindow.open(this.map, this.marker)
+    })
     this.marker.addListener('click', () => {
       this.closeWindows();
       infoWindow.open(this.map, this.marker)
@@ -110,10 +114,15 @@ class Marker {
       icon: icon
     })
     this.marker.addListener('click', this.eventClickHandler);
+    this.domElement.click(() => {
+      this.closeWindows();
+      infoWindow.open(this.map, this.marker)
+    })
     this.marker.addListener('click', () => {
       this.closeWindows();
       infoWindow.open(this.map, this.marker)
       this.markerExpandClickHandler(this.domElement);
+      console.log(this.domElement.parent().attr("class"))
     });
   }
 
