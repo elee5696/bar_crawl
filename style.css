@@ -26,17 +26,16 @@ body{
 
 .headerIcon {
   height: 100px;
-  width: 100px;
+  width: 80px;
   background-image: url('assets/images/beer_icon.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 .headerName{
-  margin: auto;
-  font-size: 3rem;
-  width: 380px;
-  padding: 0 10px;
+  font-size: 2.74rem;
+  padding-right: 6px;
+  margin: auto 0;
 }
 
 .mainContainer {
@@ -207,7 +206,6 @@ body{
 
 /* WEATHER STYLING */
 .weatherContainer{
-  width: 100%;
   display: flex;
   height: 100px;
   justify-content: space-around;
@@ -222,8 +220,7 @@ body{
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 12%;
-  border: 2px solid #B3B5BB;
+  width: 100px;
   font-family: manrope-reg;
   padding: 8px;
   color: white;
