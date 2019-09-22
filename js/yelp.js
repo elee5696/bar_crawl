@@ -57,13 +57,13 @@ class Yelp {
 *
 */
   displayToBusinessList() {
-    for(let bizIndex = 0; bizIndex < this.businessesData.businesses.length; bizIndex++) {
-      let business = this.businessesData.businesses[bizIndex];
-      let businessCats = ""
+    for(var bizIndex = 0; bizIndex < this.businessesData.businesses.length; bizIndex++) {
+      var business = this.businessesData.businesses[bizIndex];
+      var businessCats = ""
       business.categories.map((cat) => {
         businessCats += cat.title + "<br>";
       });
-      let businessInfo = $("<div>", {
+      var businessInfo = $("<div>", {
                           class: "business-info",
                           html: `
                           <div class=rating-count>reviews: ${business.review_count}</div>
@@ -76,11 +76,11 @@ class Yelp {
                           </div>
                           <a href=${business.url} target="_blank" >Visit Yelp<a>`
                           })
-      let businessName = business.name;
-      let businessRating = business.rating;
-      let businessNameContainer = $('<div>').addClass('businessName').text(businessName);
-      let businessRatingContainer = $('<div>').addClass('rating').css('background-image', `url('assets/images/ratings/${businessRating}.png')`);
-      let businessContainer = $('<div>').addClass(`business business${bizIndex}`).css('background-image', `url('assets/images/icons8-beer-48.png')`).attr("id", "business"+bizIndex);
+      var businessName = business.name;
+      var businessRating = business.rating;
+      var businessNameContainer = $('<div>').addClass('businessName').text(businessName);
+      var businessRatingContainer = $('<div>').addClass('rating').css('background-image', `url('assets/images/ratings/${businessRating}.png')`);
+      var businessContainer = $('<div>').addClass(`business business${bizIndex}`).css('background-image', `url('assets/images/icons8-beer-48.png')`).attr("id", "business"+bizIndex);
       businessContainer.append(businessNameContainer, businessRatingContainer, businessInfo);
       this.domElements.businessContainer.append(businessContainer);
     }

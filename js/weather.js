@@ -1,4 +1,4 @@
-const darkSkyApi = "10645085591c29ce58fa6f682ac0ae69";
+var darkSkyApi = "10645085591c29ce58fa6f682ac0ae69";
 /**
  * Class WeatherData takes in user's latitude and longitude coordinates
  * @param {number} latitude coordinate
@@ -34,10 +34,10 @@ class WeatherData {
   */
   render() {
     for (var forcastIndex = 0; forcastIndex < this.forcast.length; forcastIndex++) {
-      let forcastWeatherContainer = $("<div>", { class: `forcast${forcastIndex}WeatherContainer` }).css("background-image", `url("assets/images/weather/${this.forcast[forcastIndex].icon}.png")`);
-      let forcastWeatherHeader = $("<div>", { class: `forcast${forcastIndex} WeatherHeader`, text: this.days[this.forcast[forcastIndex].date.getDay()] });
-      //let forcastWeatherIcon = $("<div>", { class: `forcast${forcastIndex}WeatherIcon weatherIcon` }).css("background-image", `url("assets/images/weather/${this.forcast[forcastIndex].icon}.png")`);
-      let forcastHighLow = $("<div>", { class: `forcast${forcastIndex} WeatherHeader weather_box_text`, html: `${this.forcast[forcastIndex].high}/${this.forcast[forcastIndex].low}&#176;F`});
+      var forcastWeatherContainer = $("<div>", { class: `forcast${forcastIndex}WeatherContainer` }).css("background-image", `url("assets/images/weather/${this.forcast[forcastIndex].icon}.png")`);
+      var forcastWeatherHeader = $("<div>", { class: `forcast${forcastIndex} WeatherHeader`, text: this.days[this.forcast[forcastIndex].date.getDay()] });
+      //var forcastWeatherIcon = $("<div>", { class: `forcast${forcastIndex}WeatherIcon weatherIcon` }).css("background-image", `url("assets/images/weather/${this.forcast[forcastIndex].icon}.png")`);
+      var forcastHighLow = $("<div>", { class: `forcast${forcastIndex} WeatherHeader weather_box_text`, html: `${this.forcast[forcastIndex].high}/${this.forcast[forcastIndex].low}&#176;F`});
       forcastWeatherContainer.append(forcastWeatherHeader, forcastHighLow);
       this.domElements["forcast" + forcastIndex] = forcastWeatherContainer;
       this.domElements.container.append(forcastWeatherContainer);
@@ -49,7 +49,7 @@ class WeatherData {
    * @return {none}
   */
   getWeatherData() {
-    let ajaxConfigObject = {
+    var ajaxConfigObject = {
       dataType: "json",
       url: "https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + darkSkyApi + "/" + this.coord.lat + "," + this.coord.lng,
       method: "get",
@@ -72,14 +72,14 @@ class WeatherData {
     this.currentTemp = parseInt(data.currently.temperature);
     this.currentCondition = data.currently.summary;
     this.currentIcon = data.currently.icon;
-    let eachDaysWeather = data.daily.data;
+    var eachDaysWeather = data.daily.data;
     for (var dayIndex = 0; dayIndex < eachDaysWeather.length - 1; dayIndex++) {
-      let forcastDay = {};
-      forcastDay["date"] = this.createNewDate(eachDaysWeather[dayIndex].time);
-      forcastDay["high"] = parseInt(eachDaysWeather[dayIndex].temperatureHigh);
-      forcastDay["low"] = parseInt(eachDaysWeather[dayIndex].temperatureLow);
-      forcastDay["icon"] = eachDaysWeather[dayIndex].icon;
-      forcastDay["summary"] = eachDaysWeather[dayIndex].summary;
+      var forcastDay = {};
+      forcastDay.date = this.createNewDate(eachDaysWeather[dayIndex].time);
+      forcastDay.high = parseInt(eachDaysWeather[dayIndex].temperatureHigh);
+      forcastDay.low = parseInt(eachDaysWeather[dayIndex].temperatureLow);
+      forcastDay.icon = eachDaysWeather[dayIndex].icon;
+      forcastDay.summary = eachDaysWeather[dayIndex].summary;
       this.forcast.push(forcastDay);
     }
     this.render();
