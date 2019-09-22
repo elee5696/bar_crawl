@@ -468,6 +468,9 @@ class googleMap {
    * @return {none}
    */
   calculateAndDisplayRoute() {
+    if ($('.destinationsAdded').children().length === 0) {
+      return
+    }
     this.addWaypointsToRoute();
     $('.calculateRoute').addClass('hidden');
     var directionsService = new google.maps.DirectionsService;
