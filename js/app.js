@@ -1,4 +1,3 @@
-/* Class definition for App */
 class App {
   constructor() {
     this.apiList = {};
@@ -128,7 +127,7 @@ class App {
 * @param {object} - event
 * @return - none
 */
-  domClickHandler = (event) => {
+  domClickHandler(event) {
     if ($(event.target).is("a")){
       return;
     }
@@ -152,11 +151,11 @@ class App {
 * @return - none
 */
 
-  expandAndCollapse = (element) => {
+  expandAndCollapse(element) {
     let lastLetter = element.attr('id').match(/\d+/);
     if (element.hasClass('business')) {
-      this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.yelp.businessesData.businesses[lastLetter].coordinates.latitude),
-                                        lng: parseFloat(this.apiList.yelp.businessesData.businesses[lastLetter].coordinates.longitude)});
+      this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.yelp.getCoordinatesById('lat', lastLetter)),
+                                        lng: parseFloat(this.apiList.yelp.getCoordinatesById('lng', lastLetter))});
       if (element.hasClass("expanded")){
         $(".business").removeClass("collapsed");
         $(".business").removeClass("expanded");
@@ -168,8 +167,8 @@ class App {
         element.removeClass("collapsed").addClass("expanded");
       }
     } else {
-      this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.eventbrite.data.events[lastLetter].venue.address.latitude),
-                                        lng: parseFloat(this.apiList.eventbrite.data.events[lastLetter].venue.address.longitude)});
+      this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.eventbrite.getCoordinatesById('lat', lastLetter)),
+                                        lng: parseFloat(this.apiList.eventbrite.getCoordinatesById('lng', lastLetter))});
       if (element.hasClass("expanded")) {
         $(".event").removeClass("collapsed");
         $(".event").removeClass("expanded");
@@ -189,7 +188,7 @@ class App {
 * @return - none
 */
 
-  addLocationClickHandler = (event) => {
+  addLocationClickHandler(event) {
     let target = $(event.currentTarget);
     target.removeClass("addLocation").text("Added to route");
     let clickId = target.attr('id');

@@ -12,6 +12,7 @@ class googleMap {
     this.clearMarkers = this.clearMarkers.bind(this);
     this.updateLocation = this.updateLocation.bind(this);
     this.calculateAndDisplayRoute = this.calculateAndDisplayRoute.bind(this);
+    this.closeWindows = this.closeWindows.bind(this);
     this.lat = lat,
     this.lng = lng,
     this.mapObj = null
@@ -361,7 +362,7 @@ class googleMap {
    * @param {none}
    * @return {none}
    */
-  closeWindows = () => {
+  closeWindows() {
     for (let eventMarker of this.markers.events) {
       eventMarker.infoWindow.close(this.map);
     }

@@ -41,7 +41,7 @@ class Yelp {
         success: (data) => {
           this.businessesData = data;
           this.displayToBusinessList();
-          resolve(data);
+          resolve(this.businessesData);
         },
         error: (data) => {
           console.log('There was an error recieving data on the yelp object.');
@@ -49,16 +49,6 @@ class Yelp {
         }
       })
     })
-  }
-    /**
- * stores ajax response object
- * @param response data from ajax call
- * @return - none
- *
- */
-  processData(data) {
-    this.businessesData = data;
-    this.displayToBusinessList();
   }
 /**
 * converts data to be able to be rendered to dom
@@ -69,7 +59,6 @@ class Yelp {
   displayToBusinessList() {
     for(let bizIndex = 0; bizIndex < this.businessesData.businesses.length; bizIndex++) {
       let business = this.businessesData.businesses[bizIndex];
-      // join category titles by commas, display
       let businessCats = ""
       business.categories.map((cat) => {
         businessCats += cat.title + "<br>";
@@ -88,7 +77,7 @@ class Yelp {
                           <a href=${business.url} target="_blank" >Visit Yelp<a>`
                           })
       let businessName = business.name;
-      let businessRating = business.rating
+      let businessRating = business.rating;
       let businessNameContainer = $('<div>').addClass('businessName').text(businessName);
       let businessRatingContainer = $('<div>').addClass('rating').css('background-image', `url('assets/images/ratings/${businessRating}.png')`);
       let businessContainer = $('<div>').addClass(`business business${bizIndex}`).css('background-image', `url('assets/images/icons8-beer-48.png')`).attr("id", "business"+bizIndex);
@@ -96,13 +85,23 @@ class Yelp {
       this.domElements.businessContainer.append(businessContainer);
     }
   }
+
 /**
-* Lets app class retrieve data
-* @param none
-* @return - response object
+* converts data to be able to be rendered to dom
+* @param {string} type - lat or lng
+* @param {num} id - id of business
+* @return {num} - lat or lng of business
 *
 */
-  getData() {
-    return this.businessesData;
+  getCoordinatesById(type, id) {
+    switch(type) {
+      case 'lat':
+        return this.businessesData.businesses[id].coordinates.latitude;
+        break;
+      case 'lng':
+        return this.businessesData.businesses[id].coordinates.longitude;
+        break;
+    }
   }
+
 }
