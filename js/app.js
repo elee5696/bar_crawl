@@ -40,7 +40,7 @@ class App {
     $('.destinationsAdded').empty();
     $('.directionsPanel').empty();
     $('.calculateRoute').removeClass('hidden');
-    const userMarker = new Marker(this.apiList.map.mapObj, { name: "You" }, undefined, this.apiList.map.updateLocation, this.apiList.map.closeWindows, this.apiList.map.expandClickHandler);
+    var userMarker = new Marker(this.apiList.map.mapObj, { name: "You" }, undefined, this.apiList.map.updateLocation, this.apiList.map.closeWindows, this.apiList.map.expandClickHandler);
     userMarker.renderUser({
       lat: this.userPositionLat,
       lng: this.userPositionLong
@@ -70,7 +70,7 @@ class App {
 */
 
   initializeMap() {
-    this.apiList['map'] = new googleMap(this.userPositionLat, this.userPositionLong, this.expandAndCollapse);
+    this.apiList.map = new googleMap(this.userPositionLat, this.userPositionLong, this.expandAndCollapse);
     this.apiList.map.initMap();
   }
 
@@ -81,9 +81,9 @@ class App {
 */
 
   initAJAX() {
-    this.apiList['eventbrite'] = new Eventbrite(this.userPositionLat, this.userPositionLong);
-    this.apiList['yelp'] = new Yelp(this.userPositionLat, this.userPositionLong);
-    this.apiList['weather'] = new WeatherData(this.userPositionLat, this.userPositionLong);
+    this.apiList.eventbrite = new Eventbrite(this.userPositionLat, this.userPositionLong);
+    this.apiList.yelp = new Yelp(this.userPositionLat, this.userPositionLong);
+    this.apiList.weather = new WeatherData(this.userPositionLat, this.userPositionLong);
 
     this.apiList.weather.getWeatherData();
 
@@ -121,7 +121,7 @@ class App {
 
   loadScreenHandler() {
     $('.loading_icon').toggleClass('hidden');
-    let loadScreenDom = $(".loading_screen");
+    var loadScreenDom = $(".loading_screen");
     loadScreenDom.addClass('slide_to_top');
   }
 
@@ -138,11 +138,11 @@ class App {
   }
 
   tabClickHandler(event){
-    let element = $(event.currentTarget);
+    var element = $(event.currentTarget);
     this.domElements.tabSelected.removeClass('tabSelected');
     element.addClass('tabSelected');
     this.domElements.tabSelected = element;
-    let container = $('.' + element.text().toLowerCase());
+    var container = $('.' + element.text().toLowerCase());
     this.domElements.containerSelected.addClass('hidden');
     container.removeClass('hidden');
     this.domElements.containerSelected = container;
@@ -155,7 +155,7 @@ class App {
 */
 
   expandAndCollapse(element) {
-    let lastLetter = element.attr('id').match(/\d+/);
+    var lastLetter = element.attr('id').match(/\d+/);
     if (element.hasClass('business')) {
       this.tabClickHandler({currentTarget: $('.tabBars')});
       this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.yelp.getCoordinatesById('lat', lastLetter)),
@@ -192,11 +192,11 @@ class App {
 */
 
   addLocationClickHandler(event) {
-    let target = $(event.currentTarget);
+    var target = $(event.currentTarget);
     target.removeClass("addLocation").text("Added to route");
-    let clickId = target.attr('id');
-    let type = '';
-    let newDom = null;
+    var clickId = target.attr('id');
+    var type = '';
+    var newDom = null;
     if (clickId.includes("business")){
       newDom = $('.business.' + clickId).clone().off();
       newDom.children().not(".businessName").remove();
@@ -212,15 +212,15 @@ class App {
     }
     newDom.append($("<button>").text("delete").click(this.deleteWaypoint));
     $('.destinationsAdded').append(newDom);
-    this.apiList['map'].addRouteDestination(type, clickId);
+    this.apiList.map.addRouteDestination(type, clickId);
   }
 
   deleteWaypoint(event) {
-    let waypointDom = $(event.currentTarget).parent();
-    let wayptRouteIndex = waypointDom.index();
+    var waypointDom = $(event.currentTarget).parent();
+    var wayptRouteIndex = waypointDom.index();
     // HOW DO I GET THE MARKER TO RESET ITS ADD LOCATION TO ROUTE
-    let eventBizIndex = parseInt(waypointDom.attr("class").match(/\d+/));
-    let type = waypointDom.attr("class").split(" ")[0]; // events or business
+    var eventBizIndex = parseInt(waypointDom.attr("class").match(/\d+/));
+    var type = waypointDom.attr("class").split(" ")[0]; // events or business
     this.apiList.map.resetMarkerInfo(type, eventBizIndex)
     waypointDom.remove();
     this.apiList.map.deleteWaypoint(wayptRouteIndex);

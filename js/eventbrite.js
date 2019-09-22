@@ -18,8 +18,8 @@ class Eventbrite {
   retrieveData() {
     return new Promise((resolve, reject) =>
     {
-      let today = new Date();
-      let dateInput = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate() + 7}T${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+      var today = new Date();
+      var dateInput = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate() + 7}T${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
       $.ajax({
         url: 'php/eventbrite.php',
         method: 'GET',
@@ -68,18 +68,18 @@ class Eventbrite {
 */
 
   render(){
-    for (let eventIndex = 0; eventIndex < this.data.events.length; eventIndex++){
-      let thisEvent = this.data.events[eventIndex];
-      let newEvent = {};
-      let startDateTime =  this.parseDateTime(thisEvent.start.local);
-      let endDateTime = this.parseDateTime(thisEvent.end.local);
+    for (var eventIndex = 0; eventIndex < this.data.events.length; eventIndex++){
+      var thisEvent = this.data.events[eventIndex];
+      var newEvent = {};
+      var startDateTime =  this.parseDateTime(thisEvent.start.local);
+      var endDateTime = this.parseDateTime(thisEvent.end.local);
       newEvent.name = thisEvent.name.html;
       newEvent.description = thisEvent.description;
       newEvent.address = thisEvent.venue.localized_multi_line_address_display;
       newEvent.lat = thisEvent.venue.address.latitude;
       newEvent.lng = thisEvent.venue.address.longitude;
       this.eventStorage.push(newEvent);
-      let eventDom = $("<div>", {
+      var eventDom = $("<div>", {
         id: "event"+eventIndex,
         class: "event event" + eventIndex,
         html: `<div class="event-name">${newEvent.name}</div>
@@ -101,13 +101,13 @@ class Eventbrite {
 */
 
   parseDateTime(str){
-    let date = new Date(str);
-    let minute = date.getMinutes();
+    var date = new Date(str);
+    var minute = date.getMinutes();
     if (!minute){
       minute = '00'
     }
-    let ampm = null;
-    let hour = date.getHours();
+    var ampm = null;
+    var hour = date.getHours();
     if (hour > 12 ){
       hour -= 12;
       ampm = "PM"

@@ -32,7 +32,7 @@ class googleMap {
    * @return {none}
    */
   initMap() {
-    const map = new google.maps.Map(document.getElementById('mapDisplay'), {
+    var map = new google.maps.Map(document.getElementById('mapDisplay'), {
       zoom: 14,
       center: {
         lat: this.lat,
@@ -310,7 +310,7 @@ class googleMap {
     this.mapObj = map;
     this.initAutocomplete();
 
-    const userMarker = new Marker(this.mapObj, {name: "You"}, undefined, this.updateLocation, this.closeWindows, this.expandClickHandler);
+    var userMarker = new Marker(this.mapObj, {name: "You"}, undefined, this.updateLocation, this.closeWindows, this.expandClickHandler);
     userMarker.renderUser({
       lat: this.lat,
       lng: this.lng
@@ -330,10 +330,10 @@ class googleMap {
    * @return {none}
    */
   setMapOnAll(map) {
-    for (let eventMarker of this.markers.events) {
+    for (var eventMarker of this.markers.events) {
       eventMarker.marker.setMap(null);
     }
-    for (let bizMarker of this.markers.biz) {
+    for (var bizMarker of this.markers.biz) {
 
       bizMarker.marker.setMap(null);
     }
@@ -363,10 +363,10 @@ class googleMap {
    * @return {none}
    */
   closeWindows() {
-    for (let eventMarker of this.markers.events) {
+    for (var eventMarker of this.markers.events) {
       eventMarker.infoWindow.close(this.map);
     }
-    for (let bizMarker of this.markers.biz) {
+    for (var bizMarker of this.markers.biz) {
       bizMarker.infoWindow.close(this.map);
     }
   }
@@ -379,7 +379,7 @@ class googleMap {
     // takes in the array data from eventbrite response and creates/renders Markers
     // on the map
     events.map((event, index) => {
-      const eventMarker = new Marker(this.mapObj, event, `.event${index}`, this.updateLocation, this.closeWindows, this.expandClickHandler);
+      var eventMarker = new Marker(this.mapObj, event, `.event${index}`, this.updateLocation, this.closeWindows, this.expandClickHandler);
       this.markers.events.push(eventMarker);
       eventMarker.renderEvent(event, index);
     });
@@ -391,7 +391,7 @@ class googleMap {
    */
   addBiz(businesses) {
     businesses.map((biz, index) => {
-      const bizMarker = new Marker(this.mapObj, biz, `.business${index}`, this.updateLocation, this.closeWindows, this.expandClickHandler);
+      var bizMarker = new Marker(this.mapObj, biz, `.business${index}`, this.updateLocation, this.closeWindows, this.expandClickHandler);
       this.markers.biz.push(bizMarker);
       bizMarker.renderBiz(biz, index);
     })
@@ -503,7 +503,7 @@ class googleMap {
   }
 
   resetMarkerInfo(type, index){
-    let markerArray = null;
+    var markerArray = null;
     if (type === "business"){
       markerArray = "biz";
     }
