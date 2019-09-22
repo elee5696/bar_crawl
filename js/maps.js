@@ -497,4 +497,23 @@ class googleMap {
     this.waypts.push({location: this.markers[type][index].position, stopover: true});
   }
 
+  deleteWaypoint(index){
+    this.waypts.splice(index, 1);
+  }
+
+  resetMarkerInfo(type, index){
+    // $(`#mapDisplay #${type}${index}`).addClass("addLocation").text("Add location to route");
+    let markerArray = null;
+    if (type === "business"){
+      markerArray = "biz";
+    }
+    else{
+      markerArray = "events"
+    }
+    this.markers[markerArray][index].infoWindow.open(this.mapObj, this.markers[markerArray][index].marker);
+    console.log(type, index)
+    $(`#mapDisplay #${type}${index}`).addClass("addLocation").text("Add location to route");
+    this.markers[markerArray][index].infoWindow.close(this.mapObj)
+  }
+
 }

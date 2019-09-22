@@ -7,6 +7,8 @@ class App {
       tabSelected: null,
       containerSelected: null,
     };
+    this.deleteWaypoint = this.deleteWaypoint.bind(this);
+    this.addLocationClickHandler = this.addLocationClickHandler.bind(this);
     this.retrieveUserPositon = this.retrieveUserPositon.bind(this);
     this.initApp = this.initApp.bind(this);
     this.domClickHandler = this.domClickHandler.bind(this);
@@ -195,24 +197,31 @@ class App {
     let type = '';
     let newDom = null;
     if (clickId.includes("business")){
-      newDom = $('.business.' + clickId).clone();
+      newDom = $('.business.' + clickId).clone().off();
       newDom.children().not(".businessName").remove();
       newDom.addClass('destination');
       type = "biz";
       clickId = clickId.substr(8);
     } else {
-      newDom = $('.event.' + clickId).clone();
+      newDom = $('.event.' + clickId).clone().off();
       newDom.children().not(".event-name").remove();
       newDom.addClass('destination');
       type = "events";
       clickId = clickId.substr(5);
     }
-    newDom.append($("<button>").text("Delete"));
+    newDom.append($("<button>").text("Delete").click(this.deleteWaypoint));
     $('.destinationsAdded').append(newDom);
     this.apiList['map'].addRouteDestination(type, clickId);
   }
 
   deleteWaypoint(event) {
-    // delete button callback?
+    let waypointDom = $(event.currentTarget).parent();
+    let wayptRouteIndex = waypointDom.index();
+    // HOW DO I GET THE MARKER TO RESET ITS ADD LOCATION TO ROUTE
+    let eventBizIndex = parseInt(waypointDom.attr("class").match(/\d+/));
+    let type = waypointDom.attr("class").split(" ")[0]; // events or business
+    this.apiList.map.resetMarkerInfo(type, eventBizIndex)
+    waypointDom.remove();
+    this.apiList.map.deleteWaypoint(wayptRouteIndex);
   }
 }
