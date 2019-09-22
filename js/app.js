@@ -211,16 +211,17 @@ class App {
       clickId = clickId.substr(5);
     }
     newDom.append($("<button>").text("delete").click(this.deleteWaypoint));
-    $('.destinationsAdded').append(newDom);
-    this.apiList['map'].addRouteDestination(type, clickId);
+    $('.destinationsAdded').append(newDom).sortable({
+      containment: "parent"
+    });
+    //this.apiList['map'].addRouteDestination(type, clickId);
   }
 
   deleteWaypoint(event) {
     let waypointDom = $(event.currentTarget).parent();
     let wayptRouteIndex = waypointDom.index();
-    // HOW DO I GET THE MARKER TO RESET ITS ADD LOCATION TO ROUTE
     let eventBizIndex = parseInt(waypointDom.attr("class").match(/\d+/));
-    let type = waypointDom.attr("class").split(" ")[0]; // events or business
+    let type = waypointDom.attr("class").split(" ")[0];
     this.apiList.map.resetMarkerInfo(type, eventBizIndex)
     waypointDom.remove();
     this.apiList.map.deleteWaypoint(wayptRouteIndex);
