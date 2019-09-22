@@ -380,3 +380,12 @@ body{
 .hidden {
   display: none;
 }
+
+#directionsPanel > * {
+  display: flex;
+  justify-content: space-between;
+}
+
+#directionsPanel > div > div {
+  margin-top: 8px;
+}

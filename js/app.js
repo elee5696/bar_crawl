@@ -193,20 +193,26 @@ class App {
     target.removeClass("addLocation").text("Added to route");
     let clickId = target.attr('id');
     let type = '';
-    var newDom = null;
+    let newDom = null;
     if (clickId.includes("business")){
       newDom = $('.business.' + clickId).clone();
+      newDom.children().not(".businessName").remove();
       newDom.addClass('destination');
       type = "biz";
       clickId = clickId.substr(8);
     } else {
       newDom = $('.event.' + clickId).clone();
+      newDom.children().not(".event-name").remove();
       newDom.addClass('destination');
       type = "events";
       clickId = clickId.substr(5);
     }
+    newDom.append($("<button>").text("Delete"));
     $('.destinationsAdded').append(newDom);
     this.apiList['map'].addRouteDestination(type, clickId);
   }
 
+  deleteWaypoint(event) {
+    // delete button callback?
+  }
 }
