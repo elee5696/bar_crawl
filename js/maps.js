@@ -499,6 +499,11 @@ class googleMap {
     this.waypts.push({location: this.markers[type][index].position, stopover: true});
   }
 
+/**
+ * Prepares destination list to be pushed to route array
+ * @param - none
+ * @return - none
+ */
   addWaypointsToRoute() {
     for (let waypoint of $('.destinationsAdded').children()) {
       let target = $(waypoint);
