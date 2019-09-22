@@ -330,13 +330,13 @@ body{
   padding: 5px;
 }
 .addLocation:hover, .calculateRoute:hover{
-  background-color: lightgray;
+  background-color: #FF8A5B;
 }
 .calculateRoute{
   display: flex;
   height: 22px;
   width: 150px;
-  border: 2px solid black;
+  border: 2px solid #FF8A5B;
   border-radius: 20px;
   padding: 5px;
   margin-bottom: 3px;
@@ -395,4 +395,16 @@ body{
   position: absolute;
   top: 4px;
   right: 2px;
+}
+
+.delete_button {
+  display: flex;
+  position: relative;
+  border: 2px solid #FF8A5B;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.delete_button:hover {
+  background-color: #FF8A5B;
 }
