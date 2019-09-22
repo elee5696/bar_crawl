@@ -214,7 +214,6 @@ class App {
     $('.destinationsAdded').append(newDom).sortable({
       containment: "parent"
     });
-    //this.apiList['map'].addRouteDestination(type, clickId);
   }
 
   deleteWaypoint(event) {
