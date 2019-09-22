@@ -41,7 +41,7 @@ body{
 .mainContainer {
   display: flex;
   width: 90%;
-  height: 75%;
+  height: 590px;
   justify-content: center;
   margin: 0 auto;
 }
@@ -133,17 +133,6 @@ body{
   align-items: center;
   margin: auto;
 }
-.destination{
-  background-size: 30px;
-  background-position: left;
-  background-repeat: no-repeat;
-  transition-duration: 500ms;
-  border-radius: 2px;
-  height: 22px;
-  color: rgb(53, 53, 53);
-  overflow: hidden;
-  align-items: center;
-  margin: auto;}
 
 .address {
   font-size: .85em;
@@ -153,7 +142,6 @@ body{
 .event{
   background-color: lightgray;
 }
-
 .event-name {
   margin-top: -2px;
   text-align: center;
@@ -171,21 +159,16 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 520px;
+  height: 100%;
   width: 100%;
   overflow-y: scroll;
-}
-.destination.business, .destination.event{
-  max-height: 25px;
-  margin: 3px;
-  flex: 1;
+  overflow-x: hidden;
 }
 .collapsed{
   flex: 0;
   margin: auto;
   border: 0;
 }
-
 .expanded {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -193,14 +176,36 @@ body{
   max-height: 100%;
   background-position: center;
 }
-
-.business:hover:not(.expanded) {
+.destination{
+  position: relative;
+  background-size: 30px;
+  background-position: left;
+  background-repeat: no-repeat;
+  transition-duration: 500ms;
+  border-radius: 2px;
+  height: 22px;
+  color: rgb(53, 53, 53);
+  overflow: hidden;
+  align-items: center;
+  margin: auto;
+}
+.destination > *{
+  text-align: left;
+  margin-left: 33px;
+}
+.destination.business, .destination.event{
+  max-height: 25px;
+  margin: 3px;
+  flex: 1;
+  background-position: left;
+}
+.business:hover:not(.expanded, .destination) {
   transform: scale(1.08);
   z-index: 1;
   cursor: pointer;
   background-color: rgb(252, 214, 118);
 }
-.event:hover:not(.expanded) {
+.event:hover:not(.expanded, .destination) {
   transform: scale(1.08);
   z-index: 1;
   cursor: pointer;
@@ -328,7 +333,7 @@ body{
 }
 .calculateRoute{
   display: flex;
-  height: 20px;
+  height: 22px;
   width: 150px;
   border: 2px solid black;
   border-radius: 20px;
@@ -381,11 +386,12 @@ body{
   display: none;
 }
 
-#directionsPanel > * {
-  display: flex;
-  justify-content: space-between;
+.event-name, .businessName {
+  margin-top: 1px;
 }
 
-#directionsPanel > div > div {
-  margin-top: 8px;
+.destination button {
+  position: absolute;
+  top: 4px;
+  right: 2px;
 }

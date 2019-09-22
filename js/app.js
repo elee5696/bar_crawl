@@ -39,6 +39,7 @@ class App {
     $('.weatherContainer').empty();
     $('.destinationsAdded').empty();
     $('.directionsPanel').empty();
+    $('.calculateRoute').removeClass('hidden');
     const userMarker = new Marker(this.apiList.map.mapObj, { name: "You" }, undefined, this.apiList.map.updateLocation, this.apiList.map.closeWindows, this.apiList.map.expandClickHandler);
     userMarker.renderUser({
       lat: this.userPositionLat,
@@ -209,7 +210,7 @@ class App {
       type = "events";
       clickId = clickId.substr(5);
     }
-    newDom.append($("<button>").text("Delete").click(this.deleteWaypoint));
+    newDom.append($("<button>").text("delete").click(this.deleteWaypoint));
     $('.destinationsAdded').append(newDom);
     this.apiList['map'].addRouteDestination(type, clickId);
   }

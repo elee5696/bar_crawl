@@ -24,7 +24,7 @@ class googleMap {
     },
     this.directionsRenderer = null;
     this.waypts = [],
-    this.expandClickHandler = expandClickHandler;
+    this.expandClickHandler = expandClickHandler
   }
   /**
    * Function to create a google maps object and append to dom
@@ -468,6 +468,7 @@ class googleMap {
    * @return {none}
    */
   calculateAndDisplayRoute() {
+    $('.calculateRoute').addClass('hidden');
     var directionsService = new google.maps.DirectionsService;
     this.directionsRenderer = new google.maps.DirectionsRenderer;
     this.directionsRenderer.setMap(this.mapObj);
