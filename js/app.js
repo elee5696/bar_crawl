@@ -210,7 +210,7 @@ class App {
       type = "events";
       clickId = clickId.substr(5);
     }
-    newDom.append($("<button>").text("delete").click(this.deleteWaypoint));
+    newDom.append($("<button>").addClass("delete_button").text("delete").click(this.deleteWaypoint));
     $('.destinationsAdded').append(newDom).sortable({
       containment: "parent"
     });
