@@ -199,19 +199,21 @@ body{
   flex: 1;
   background-position: left;
 }
-.business:hover:not(.expanded) {
+.businessContainer > .business:hover:not(.expanded) {
   transform: scale(1.08);
   z-index: 1;
   cursor: pointer;
   background-color: rgb(252, 214, 118);
 }
-.event:hover:not(.expanded) {
+.eventsContainer > .event:hover:not(.expanded) {
   transform: scale(1.08);
   z-index: 1;
   cursor: pointer;
   background-color: rgb(252, 214, 118);
 }
-
+.destinationsAdded > * {
+  transition: none;
+}
 /* WEATHER STYLING */
 .weatherContainer{
   display: flex;

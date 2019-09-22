@@ -87,7 +87,7 @@ class Yelp {
   }
 
 /**
-* converts data to be able to be rendered to dom
+* Gets coordiantes for businesses
 * @param {string} type - lat or lng
 * @param {num} id - id of business
 * @return {num} - lat or lng of business

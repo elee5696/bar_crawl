@@ -468,6 +468,7 @@ class googleMap {
    * @return {none}
    */
   calculateAndDisplayRoute() {
+    this.addWaypointsToRoute();
     $('.calculateRoute').addClass('hidden');
     var directionsService = new google.maps.DirectionsService;
     this.directionsRenderer = new google.maps.DirectionsRenderer;
@@ -496,6 +497,18 @@ class googleMap {
    */
   addRouteDestination(type, index){
     this.waypts.push({location: this.markers[type][index].position, stopover: true});
+  }
+
+  addWaypointsToRoute() {
+    for (let waypoint of $('.destinationsAdded').children()) {
+      let target = $(waypoint);
+      let id = target.attr('id').substr(8);
+      if (target.find('.business')) {
+        this.addRouteDestination('biz', id);
+      } else {
+        this.addRouteDestination('events', id);
+      }
+    }
   }
 
   deleteWaypoint(index){
