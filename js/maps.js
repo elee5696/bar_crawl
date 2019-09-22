@@ -502,7 +502,6 @@ class googleMap {
   }
 
   resetMarkerInfo(type, index){
-    // $(`#mapDisplay #${type}${index}`).addClass("addLocation").text("Add location to route");
     let markerArray = null;
     if (type === "business"){
       markerArray = "biz";
@@ -511,7 +510,6 @@ class googleMap {
       markerArray = "events"
     }
     this.markers[markerArray][index].infoWindow.open(this.mapObj, this.markers[markerArray][index].marker);
-    console.log(type, index)
     $(`#mapDisplay #${type}${index}`).addClass("addLocation").text("Add location to route");
     this.markers[markerArray][index].infoWindow.close(this.mapObj)
   }
