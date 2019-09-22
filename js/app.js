@@ -154,12 +154,12 @@ class App {
   expandAndCollapse(element) {
     let lastLetter = element.attr('id').match(/\d+/);
     if (element.hasClass('business')) {
+      this.tabClickHandler({currentTarget: $('.tabBars')});
       this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.yelp.getCoordinatesById('lat', lastLetter)),
                                         lng: parseFloat(this.apiList.yelp.getCoordinatesById('lng', lastLetter))});
       if (element.hasClass("expanded")){
         $(".business").removeClass("collapsed");
         $(".business").removeClass("expanded");
-        return;
       }
       else{
         $(".business").removeClass("expanded");
@@ -167,12 +167,12 @@ class App {
         element.removeClass("collapsed").addClass("expanded");
       }
     } else {
+      this.tabClickHandler({ currentTarget: $('.tabEvents') });
       this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.eventbrite.getCoordinatesById('lat', lastLetter)),
                                         lng: parseFloat(this.apiList.eventbrite.getCoordinatesById('lng', lastLetter))});
       if (element.hasClass("expanded")) {
         $(".event").removeClass("collapsed");
         $(".event").removeClass("expanded");
-        return;
       }
       else {
         $(".event").removeClass("expanded");
