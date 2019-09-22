@@ -510,10 +510,12 @@ class googleMap {
   addWaypointsToRoute() {
     for (let waypoint of $('.destinationsAdded').children()) {
       let target = $(waypoint);
-      let id = target.attr('id').substr(8);
-      if (target.find('.business')) {
+      let id = target.attr('id');
+      if (id.includes("business")) {
+        id = id.substr(8);
         this.addRouteDestination('biz', id);
       } else {
+        id = id.substr(5);
         this.addRouteDestination('events', id);
       }
     }
