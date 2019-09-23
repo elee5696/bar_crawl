@@ -15,7 +15,6 @@ class Marker {
   }
   /**
    creates and renders the user's marker on the Map
-
    * @param {object} position: object containing lat and lng key/value pairs
    * @return {none}
   */
@@ -28,14 +27,13 @@ class Marker {
     this.marker = userMark;
   }
 
-/**
- * creates and renders an event marker + info window on the Map with given
-  api response data
-
-  * @param {object} position - object containing singular event response data from eventbrite api
-  * @param {number} index - number to index its position in the array
-  * @return {none} - nothing
- */
+  /**
+   * creates and renders an event marker + info window on the Map with given
+    api response data
+    * @param {object} position - object containing singular event response data from eventbrite api
+    * @param {number} index - number to index its position in the array
+    * @return {none} - nothing
+   */
 
   renderEvent(event, index) {
     const position = {
@@ -52,10 +50,10 @@ class Marker {
     this.type = "events"
     this.name = event.name.text;
     const infoWindow = new google.maps.InfoWindow({
-      content: `<div class="eventInfoWindow"><div>${this.name}</div>
+      content: `<div class="eventInfoWindow infoWindow"><div>${this.name}</div>
                 <div>${this.data.venue.address.localized_multi_line_address_display[0]}</div>
                 <div>${this.data.venue.address.localized_multi_line_address_display[1]}</div>
-                <div id="event${index}" class="route addLocation">Add location to route</div></div>`
+                <div id="event${index}" class="route addLocation">Add Location To Route</div></div>`
     })
     this.infoWindow = infoWindow;
     this.marker = new google.maps.Marker({
@@ -77,14 +75,13 @@ class Marker {
 
   }
 
-/**
-  * creates and renders a business marker + info window on the Map with given
-  * api response data
-
-  * @param {object} position: object containing singular business response data from Yelp api
-  * @param {number} index: number to index its position in the array
-  * @return {none}
- */
+  /**
+    * creates and renders a business marker + info window on the Map with given
+    * api response data
+    * @param {object} position: object containing singular business response data from Yelp api
+    * @param {number} index: number to index its position in the array
+    * @return {none}
+   */
   renderBiz(biz, index) {
     const position = {
       lat: parseFloat(biz.coordinates.latitude),
@@ -102,7 +99,7 @@ class Marker {
     this.name = biz.name;
 
     const infoWindow = new google.maps.InfoWindow({
-      content: `<div class="businessInfoWindow"><div>${this.name}</div>
+      content: `<div class="businessInfoWindow infoWindow"><div>${this.name}</div>
                 <div id="business${index}" class="route addLocation">Add location to route</div></div>`
     })
     this.infoWindow = infoWindow;
@@ -126,10 +123,10 @@ class Marker {
   }
 
 
-/*
-  click handler for marker object to set the position of the map to the marker
-*/
+  /*
+    click handler for marker object to set the position of the map to the marker
+  */
   eventClickHandler() {
-   this.updateCenterCallback(this.position);
+    this.updateCenterCallback(this.position);
   }
 }

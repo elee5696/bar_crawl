@@ -22,6 +22,8 @@ body{
   height: 100px;
   color: white;
   margin: 0 auto;
+  margin-bottom: 3%;
+  margin-top: 1%;
 }
 
 .headerIcon {
@@ -33,8 +35,9 @@ body{
   background-position: center;
 }
 .headerName{
-  font-size: 2.9rem;
-  margin: auto 20px auto 0;
+  font-size: 2.74rem;
+  padding-right: 6px;
+  margin: auto 0;
 }
 
 .mainContainer {
@@ -221,6 +224,7 @@ body{
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
+  margin-left: 8%;
 }
 .weatherIcon {
   height: 80px;
@@ -327,22 +331,23 @@ body{
 
 .route{
   border-radius: 15px;
-  border: 2px solid #FF8A5B;
+  border: 2px solid #e8b503;
   padding: 5px;
 }
 .addLocation:hover, .calculateRoute:hover{
-  background-color: #FF8A5B;
+  background-color: #e8b503;
 }
 .calculateRoute{
   display: flex;
   height: 22px;
   width: 150px;
-  border: 2px solid #FF8A5B;
+  border: 2px solid #e8b503;
   border-radius: 20px;
   padding: 5px;
   margin-bottom: 3px;
 }
 .calculateRouteButton{
+  font-family: manrope-reg;
   margin: auto;
 }
 
@@ -401,11 +406,11 @@ body{
 .delete_button {
   display: flex;
   position: relative;
-  border: 2px solid #FF8A5B;
+  border: 2px solid #e8b503;
   border-radius: 20px;
   background-color: white;
 }
 
 .delete_button:hover {
-  background-color: #FF8A5B;
+  background-color: #e8b503;
 }

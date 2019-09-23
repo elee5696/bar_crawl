@@ -16,21 +16,21 @@ class App {
     this.tabClickHandler = this.tabClickHandler.bind(this);
   }
 
-/**
-* Gets position of user at app start
-* @param - none
-* @return - none
-*/
+  /**
+  * Gets position of user at app start
+  * @param - none
+  * @return - none
+  */
 
   initApp() {
     navigator.geolocation.getCurrentPosition(this.retrieveUserPositon);
   }
 
-/**
-* Updates location from user entry, updates DOM and map
-* @param - none
-* @return - none
-*/
+  /**
+  * Updates location from user entry, updates DOM and map
+  * @param - none
+  * @return - none
+  */
 
   updateLocation() {
     this.apiList.map.clearMarkers();
@@ -49,11 +49,11 @@ class App {
     this.initAJAX();
   }
 
-/**
-* Sets lat and lng, calls init methods
-* @param {object} - object returned from initApp()
-* @return - none
-*/
+  /**
+  * Sets lat and lng, calls init methods
+  * @param {object} - object returned from initApp()
+  * @return - none
+  */
 
   retrieveUserPositon(data) {
     this.userPositionLat = data.coords.latitude;
@@ -63,47 +63,47 @@ class App {
     this.initClickHandlers();
   }
 
-/**
-* Instantiates map
-* @param - none
-* @return - none
-*/
+  /**
+  * Instantiates map
+  * @param - none
+  * @return - none
+  */
 
   initializeMap() {
     this.apiList.map = new googleMap(this.userPositionLat, this.userPositionLong, this.expandAndCollapse);
     this.apiList.map.initMap();
   }
 
-/**
-* Instantiates API classes, calls retrieveData methods for each class, updates DOM
-* @param - none
-* @return - none
-*/
+  /**
+  * Instantiates API classes, calls retrieveData methods for each class, updates DOM
+  * @param - none
+  * @return - none
+  */
 
   initAJAX() {
-    this.apiList.eventbrite = new Eventbrite(this.userPositionLat, this.userPositionLong);
-    this.apiList.yelp = new Yelp(this.userPositionLat, this.userPositionLong);
+    this.apiList.eventbrite = new Eventbrite(this.userPositionLat, this.userPositionLong, this.addLocationClickHandler);
+    this.apiList.yelp = new Yelp(this.userPositionLat, this.userPositionLong, this.addLocationClickHandler);
     this.apiList.weather = new WeatherData(this.userPositionLat, this.userPositionLong);
 
     this.apiList.weather.getWeatherData();
 
     this.apiList.eventbrite.retrieveData().then(data => this.apiList.map.addEvents(data.events))
-                                          .catch(data => console.log(data));
+      .catch(data => console.log(data));
 
     this.apiList.yelp.retrieveData().then(data => {
-                                                    this.apiList.map.addBiz(data.businesses);
-                                                    this.loadScreenHandler();
-                                                  })
-                                    .catch(data => console.log(data));
+      this.apiList.map.addBiz(data.businesses);
+      this.loadScreenHandler();
+    })
+      .catch(data => console.log(data));
   }
 
-/**
-* creates click handlers for DOM elements
-* @param - none
-* @return - none
-*/
+  /**
+  * creates click handlers for DOM elements
+  * @param - none
+  * @return - none
+  */
 
-  initClickHandlers(){
+  initClickHandlers() {
     this.domElements.tabSelected = $('.tabBars');
     this.domElements.containerSelected = $('.businessContainer');
     $('.eventsContainer').on('click', '.event', this.domClickHandler);
@@ -113,11 +113,11 @@ class App {
     $('.tabContainer').on('click', '.tab', this.tabClickHandler);
   }
 
-/**
-* click handler for loading screen
-* @param - none
-* @return - none
-*/
+  /**
+  * click handler for loading screen
+  * @param - none
+  * @return - none
+  */
 
   loadScreenHandler() {
     $('.loading_icon').toggleClass('hidden');
@@ -125,19 +125,19 @@ class App {
     loadScreenDom.addClass('slide_to_top');
   }
 
-/**
-* click handler for DOM elements
-* @param {object} - event
-* @return - none
-*/
+  /**
+  * click handler for DOM elements
+  * @param {object} - event
+  * @return - none
+  */
   domClickHandler(event) {
-    if ($(event.target).is("a")){
+    if ($(event.target).is("a")) {
       return;
     }
     this.expandAndCollapse($(event.currentTarget));
   }
 
-  tabClickHandler(event){
+  tabClickHandler(event) {
     var element = $(event.currentTarget);
     this.domElements.tabSelected.removeClass('tabSelected');
     element.addClass('tabSelected');
@@ -148,31 +148,35 @@ class App {
     this.domElements.containerSelected = container;
   }
 
-/**
-* expands/contracts DOM elements in the side bar
-* @param {object} - jQuery object
-* @return - none
-*/
+  /**
+  * expands/contracts DOM elements in the side bar
+  * @param {object} - jQuery object
+  * @return - none
+  */
 
   expandAndCollapse(element) {
     var lastLetter = element.attr('id').match(/\d+/);
     if (element.hasClass('business')) {
-      this.tabClickHandler({currentTarget: $('.tabBars')});
-      this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.yelp.getCoordinatesById('lat', lastLetter)),
-                                        lng: parseFloat(this.apiList.yelp.getCoordinatesById('lng', lastLetter))});
-      if (element.hasClass("expanded")){
+      this.tabClickHandler({ currentTarget: $('.tabBars') });
+      this.apiList.map.updateLocation({
+        lat: parseFloat(this.apiList.yelp.getCoordinatesById('lat', lastLetter)),
+        lng: parseFloat(this.apiList.yelp.getCoordinatesById('lng', lastLetter))
+      });
+      if (element.hasClass("expanded")) {
         $(".business").removeClass("collapsed");
         $(".business").removeClass("expanded");
       }
-      else{
+      else {
         $(".business").removeClass("expanded");
         $(".business").addClass("collapsed")
         element.removeClass("collapsed").addClass("expanded");
       }
     } else {
       this.tabClickHandler({ currentTarget: $('.tabEvents') });
-      this.apiList.map.updateLocation({ lat: parseFloat(this.apiList.eventbrite.getCoordinatesById('lat', lastLetter)),
-                                        lng: parseFloat(this.apiList.eventbrite.getCoordinatesById('lng', lastLetter))});
+      this.apiList.map.updateLocation({
+        lat: parseFloat(this.apiList.eventbrite.getCoordinatesById('lat', lastLetter)),
+        lng: parseFloat(this.apiList.eventbrite.getCoordinatesById('lng', lastLetter))
+      });
       if (element.hasClass("expanded")) {
         $(".event").removeClass("collapsed");
         $(".event").removeClass("expanded");
@@ -185,30 +189,28 @@ class App {
     }
   }
 
-/**
-* click handler for adding markers to the route
-* @param {object} - event object
-* @return - none
-*/
+  /**
+  * click handler for adding markers to the route
+  * @param {object} - event object
+  * @return - none
+  */
 
   addLocationClickHandler(event) {
     var target = $(event.currentTarget);
-    target.removeClass("addLocation").text("Added to route");
     var clickId = target.attr('id');
-    var type = '';
     var newDom = null;
-    if (clickId.includes("business")){
+    if (clickId.includes("business")) {
       newDom = $('.business.' + clickId).clone().off();
+      clickId = clickId.substr(8);
+      $(`#business${clickId}.route`).removeClass("addLocation").text("Added to route");
       newDom.children().not(".businessName").remove();
       newDom.addClass('destination');
-      type = "biz";
-      clickId = clickId.substr(8);
     } else {
       newDom = $('.event.' + clickId).clone().off();
+      clickId = clickId.substr(5);
+      $(`#event${clickId}.route`).removeClass("addLocation").text("Added to route");
       newDom.children().not(".event-name").remove();
       newDom.addClass('destination');
-      type = "events";
-      clickId = clickId.substr(5);
     }
     newDom.append($("<button>").addClass("delete_button").text("delete").click(this.deleteWaypoint));
     $('.destinationsAdded').append(newDom).sortable({
@@ -221,7 +223,7 @@ class App {
     let wayptRouteIndex = waypointDom.index();
     let eventBizIndex = parseInt(waypointDom.attr("class").match(/\d+/));
     let type = waypointDom.attr("class").split(" ")[0];
-    this.apiList.map.resetMarkerInfo(type, eventBizIndex)
+    this.apiList.map.resetMarkerInfo(type, eventBizIndex);
     waypointDom.remove();
     this.apiList.map.deleteWaypoint(wayptRouteIndex);
   }
