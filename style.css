@@ -93,6 +93,8 @@ body{
   height: 40px;
 }
 .tab {
+  background-color: rgb(94, 94, 94);
+  text-align: center;
   cursor: pointer;
   font-size: 1.3rem;
   padding: 7px 10px;
