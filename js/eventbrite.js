@@ -1,5 +1,5 @@
 class Eventbrite {
-  constructor(lat, lng) {
+  constructor(lat, lng, addLocationClickHandler) {
     this.key = 'YT37TJX32QTNUIJPS4NG';
     this.eventStorage = [];
     this.data = null;
@@ -7,6 +7,7 @@ class Eventbrite {
     this.lng = lng;
     this.domContainer = $(".eventsContainer");
     this.render = this.render.bind(this);
+    this.addLocation = addLocationClickHandler;
   }
 
 /**
@@ -88,8 +89,9 @@ class Eventbrite {
               <div class='event-time'>${startDateTime.month}/${startDateTime.dayNum} ${startDateTime.hour}:${startDateTime.minute} ${startDateTime.ampm} - ${endDateTime.hour}:${endDateTime.minute} ${endDateTime.ampm}</div>
               <div class="event-info">Event Summary:<br>${thisEvent.summary}</div>
               <a class="event-url" href="${thisEvent.url} target=_blank">Visit Event Site</a>`});
-
-      eventDom.css('background-image', `url('assets/images/icons8-event-64.png')`)
+      eventDom.css('background-image', `url('assets/images/icons8-event-64.png')`);
+      var addToRouteButton = $('<div>').addClass('route addLocation').attr('id', 'event' + eventIndex).text('Add Location To Route').click(this.addLocation);
+      eventDom.append(addToRouteButton);
       this.domContainer.append(eventDom);
     }
   }

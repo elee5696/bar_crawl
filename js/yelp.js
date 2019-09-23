@@ -6,7 +6,7 @@ class Yelp {
  * @return - none
  *
  */
-  constructor(userLatitude, userLongitude) {
+  constructor(userLatitude, userLongitude, addLocationClickHandler) {
     this.apiKey = 'Bearer a_BrDbXlVK8u3TbVbpFRC9EP6Ye_73iUJQvTRDbJBrbD_e0t9x4OqWni0XZK8hE_VLr2GLWHBfgrEDdY6jZO16i1Gq5tMTBIBczxbqU1e2P3-cOOmkTUVgNE0TiAXXYx';
     this.userLatitude = userLatitude;
     this.userLongitude = userLongitude;
@@ -15,6 +15,7 @@ class Yelp {
     this.domElements = {
       businessContainer: $('.businessContainer')
     }
+    this.addLocation = addLocationClickHandler;
   }
   /**
  * contains ajax call for yelp api
@@ -78,10 +79,11 @@ class Yelp {
                           })
       var businessName = business.name;
       var businessRating = business.rating;
+      var addToRouteButton = $('<div>').addClass('route addLocation').attr('id', 'business' + bizIndex).text('Add Location To Route').click(this.addLocation);
       var businessNameContainer = $('<div>').addClass('businessName').text(businessName);
       var businessRatingContainer = $('<div>').addClass('rating').css('background-image', `url('assets/images/ratings/${businessRating}.png')`);
       var businessContainer = $('<div>').addClass(`business business${bizIndex}`).css('background-image', `url('assets/images/icons8-beer-48.png')`).attr("id", "business"+bizIndex);
-      businessContainer.append(businessNameContainer, businessRatingContainer, businessInfo);
+      businessContainer.append(businessNameContainer, businessRatingContainer, businessInfo, addToRouteButton);
       this.domElements.businessContainer.append(businessContainer);
     }
   }

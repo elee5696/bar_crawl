@@ -81,8 +81,8 @@ class App {
 */
 
   initAJAX() {
-    this.apiList.eventbrite = new Eventbrite(this.userPositionLat, this.userPositionLong);
-    this.apiList.yelp = new Yelp(this.userPositionLat, this.userPositionLong);
+    this.apiList.eventbrite = new Eventbrite(this.userPositionLat, this.userPositionLong, this.addLocationClickHandler);
+    this.apiList.yelp = new Yelp(this.userPositionLat, this.userPositionLong, this.addLocationClickHandler);
     this.apiList.weather = new WeatherData(this.userPositionLat, this.userPositionLong);
 
     this.apiList.weather.getWeatherData();
@@ -193,22 +193,20 @@ class App {
 
   addLocationClickHandler(event) {
     var target = $(event.currentTarget);
-    target.removeClass("addLocation").text("Added to route");
     var clickId = target.attr('id');
-    var type = '';
     var newDom = null;
     if (clickId.includes("business")){
       newDom = $('.business.' + clickId).clone().off();
+      clickId = clickId.substr(8);
+      $(`#business${clickId}.route`).removeClass("addLocation").text("Added to route");
       newDom.children().not(".businessName").remove();
       newDom.addClass('destination');
-      type = "biz";
-      clickId = clickId.substr(8);
     } else {
       newDom = $('.event.' + clickId).clone().off();
+      clickId = clickId.substr(5);
+      $(`#event${clickId}.route`).removeClass("addLocation").text("Added to route");
       newDom.children().not(".event-name").remove();
       newDom.addClass('destination');
-      type = "events";
-      clickId = clickId.substr(5);
     }
     newDom.append($("<button>").addClass("delete_button").text("delete").click(this.deleteWaypoint));
     $('.destinationsAdded').append(newDom).sortable({
@@ -221,7 +219,7 @@ class App {
     let wayptRouteIndex = waypointDom.index();
     let eventBizIndex = parseInt(waypointDom.attr("class").match(/\d+/));
     let type = waypointDom.attr("class").split(" ")[0];
-    this.apiList.map.resetMarkerInfo(type, eventBizIndex)
+    this.apiList.map.resetMarkerInfo(type, eventBizIndex);
     waypointDom.remove();
     this.apiList.map.deleteWaypoint(wayptRouteIndex);
   }
