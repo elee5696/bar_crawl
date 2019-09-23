@@ -224,6 +224,7 @@ class App {
     let eventBizIndex = parseInt(waypointDom.attr("class").match(/\d+/));
     let type = waypointDom.attr("class").split(" ")[0];
     this.apiList.map.resetMarkerInfo(type, eventBizIndex);
+    $(`#${type}${eventBizIndex}.route`).toggleClass('addLocation').text('Add Location To Route');
     waypointDom.remove();
     this.apiList.map.deleteWaypoint(wayptRouteIndex);
   }
