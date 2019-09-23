@@ -34,11 +34,11 @@ class WeatherData {
   */
   render() {
     for (var forcastIndex = 0; forcastIndex < this.forcast.length; forcastIndex++) {
-      var forcastWeatherContainer = $("<div>", { class: `forcast${forcastIndex}WeatherContainer` }).css("background-image", `url("assets/images/weather/${this.forcast[forcastIndex].icon}.png")`);
-      var forcastWeatherHeader = $("<div>", { class: `forcast${forcastIndex} WeatherHeader`, text: this.days[this.forcast[forcastIndex].date.getDay()] });
-      //var forcastWeatherIcon = $("<div>", { class: `forcast${forcastIndex}WeatherIcon weatherIcon` }).css("background-image", `url("assets/images/weather/${this.forcast[forcastIndex].icon}.png")`);
+      var forcastWeatherContainer = $("<div>", { class: `forcast${forcastIndex}WeatherContainer` })//.css("background-image", `url("assets/images/weather/${this.forcast[forcastIndex].icon}.png")`);
+      var forcastWeatherHeader = $("<div>", { class: `forcast${forcastIndex} weatherHeader`, text: this.days[this.forcast[forcastIndex].date.getDay()] });
+      var forcastWeatherIcon = $("<div>", { class: `forcast${forcastIndex}WeatherIcon weatherIcon` }).css("background-image", `url("assets/images/weather/${this.forcast[forcastIndex].icon}.png")`);
       var forcastHighLow = $("<div>", { class: `forcast${forcastIndex} WeatherHeader weather_box_text`, html: `${this.forcast[forcastIndex].high}/${this.forcast[forcastIndex].low}&#176;F`});
-      forcastWeatherContainer.append(forcastWeatherHeader, forcastHighLow);
+      forcastWeatherContainer.append(forcastWeatherHeader, forcastWeatherIcon, forcastHighLow);
       this.domElements["forcast" + forcastIndex] = forcastWeatherContainer;
       this.domElements.container.append(forcastWeatherContainer);
     }
